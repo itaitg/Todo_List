@@ -18,6 +18,7 @@ using json = nlohmann::json;
 class Task
 {
 public:
+
     explicit Task(const std::string& task);
     Task();
     ~Task() = default;

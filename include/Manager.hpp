@@ -18,14 +18,15 @@ public:
     void Addtask(const std::string& description);
     void Removetask(const size_t& id);
     void Markcompleted(const size_t& id);
-    void Listtasks() const; //add option without completed
-    void Save();
+    void Listtasks() const;
 
 
 private:
+    void Save();
     void Load();
 
     std::vector<Task> m_list;
+    std::vector<Task> m_completed;
 };
 
 

@@ -2,6 +2,8 @@
 // Created by bender on 28/09/2025.
 //
 
+#include <stdexcept>
+
 #include "Task.hpp"
 
 Task::Task(const std::string& task): m_description(std::make_shared<std::string>(task)),
@@ -60,6 +62,7 @@ void Task::Setstatus(const bool status)
 void to_json(json& j, const Task& task)
 {
     j = json
+
     {
             {"id", task.GetID()},
             {"description", task.Getdesc()},
@@ -69,6 +72,13 @@ void to_json(json& j, const Task& task)
 
 void from_json(const json& j, Task& task)
 {
+    bool json_check = j.contains("id");
+    json_check *= j.contains("description");
+    json_check *= j.contains("completed");
+
+    if(!json_check)
+        throw std::runtime_error("json invalid");
+
     size_t id;
     j.at("id").get_to(id);
     task.SetID(id);
